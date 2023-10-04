@@ -3,6 +3,8 @@ from src.item import Item
 
 
 @pytest.fixture
+
+
 def item():
     return Item('Товар', 100, 10)
 
