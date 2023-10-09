@@ -12,7 +12,7 @@ class Item:
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
-        Создание экземпляра класса item.
+        Создание экземпляра класса Item.
 
         :param name: Название товара.
         :param price: Цена за единицу товара.
@@ -79,3 +79,15 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+
+    def __add__(self, other):
+        """
+        Переопределяем оператор сложения для Item.
+
+        :param other: Другой объект (Item) для сложения.
+        :return: Новый экземпляр класса Item с обновленным количеством товара.
+        """
+        if isinstance(other, Item):
+            return Item(self.name, self.price, self.quantity + other.quantity)
+        else:
+            raise ValueError("Нельзя сложить Item с объектом другого класса")

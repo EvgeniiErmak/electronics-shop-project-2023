@@ -133,3 +133,40 @@ def test_repr_method():
     """
     item = Item('Test', 10, 1)
     assert repr(item) == "Item('Test', 10, 1)"
+
+def test_pay_rate():
+    """
+    Тестирование атрибута класса pay_rate класса Item.
+    """
+    item = Item('Test', 10, 1)
+    assert item.pay_rate == 1.0
+    Item.pay_rate = 0.9
+    item.apply_discount()
+    assert item.price == 9.0
+
+def test_instantiate_from_csv_nonexistent_file():
+    """
+    Тестирование метода instantiate_from_csv класса Item для несуществующего файла.
+    """
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv("nonexistent.csv")
+
+def test_string_to_number_decimal():
+    """
+    Тестирование метода string_to_number класса Item для десятичных чисел.
+    """
+    assert Item.string_to_number('42.5') == 42
+
+def test_string_to_number_negative():
+    """
+    Тестирование метода string_to_number класса Item для отрицательных чисел.
+    """
+    assert Item.string_to_number('-42') == -42
+
+def test_add_method_with_invalid_type():
+    """
+    Тестирование метода __add__ класса Item с неверным типом объекта.
+    """
+    item = Item('Test', 10, 1)
+    with pytest.raises(ValueError):
+        item + "InvalidItem"
