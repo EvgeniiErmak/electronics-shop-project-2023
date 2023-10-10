@@ -30,6 +30,19 @@ class Item:
     def __str__(self):
         return self.__name
 
+    def __add__(self, other):
+        """
+        Переопределяем оператор сложения для Item.
+
+        :param other: Другой объект (Item) для сложения.
+        :return: Новый экземпляр класса Item с обновленным количеством товара.
+        """
+        if isinstance(other, Item):
+            return Item(self.name, self.price, self.quantity + other.quantity)
+        else:
+            raise ValueError("Нельзя сложить Item с объектом другого класса")
+
+
     @classmethod
     def instantiate_from_csv(cls, filename: str):
         """
@@ -80,14 +93,3 @@ class Item:
         """
         self.price *= self.pay_rate
 
-    def __add__(self, other):
-        """
-        Переопределяем оператор сложения для Item.
-
-        :param other: Другой объект (Item) для сложения.
-        :return: Новый экземпляр класса Item с обновленным количеством товара.
-        """
-        if isinstance(other, Item):
-            return Item(self.name, self.price, self.quantity + other.quantity)
-        else:
-            raise ValueError("Нельзя сложить Item с объектом другого класса")
