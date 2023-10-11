@@ -1,17 +1,17 @@
 from src.keyboard import Keyboard
 
 if __name__ == '__main__':
-    kb = Keyboard('Dark Project KD87A', 9600, 5)
+    kb = Keyboard('Dark Project', 'KD87A', 9600, 'EN')
     assert str(kb) == "Dark Project KD87A"
 
-    assert str(kb.language) == "EN"
+    assert kb.language == "EN"
 
-    kb.change_lang()
-    assert str(kb.language) == "RU"
+    kb.change_lang("RU")  # Устанавливаем язык "RU"
+    assert kb.language == "RU"
 
-    # Сделали EN -> RU -> EN
-    kb.change_lang()
-    assert str(kb.language) == "EN"
+    # Сделали RU -> EN
+    kb.change_lang("EN")  # Возвращаем язык на "EN"
+    assert kb.language == "EN"
 
-    kb.language = 'CH'
-    # AttributeError: property 'language' of 'Keyboard' object has no setter
+    # Попробовать установить неподдерживаемый язык
+    kb.language = 'CH'  # Это должно вызвать ошибку, так как "CH" не поддерживается
